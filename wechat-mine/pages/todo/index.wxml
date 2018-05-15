@@ -1,0 +1,19 @@
+<!--pages/todo/index.wxml-->
+<text>做点什么呢？</text>
+<view class='todo_body'>
+  <view class='todo_sum'>
+    <text>今日任务：</text>
+    <text>已完成任务：</text>
+  </view>
+  <view class='todo_list'>
+    <checkbox-group bindchange="checkboxChange1">
+      <label wx:for='{{todo_list}}'>
+        <checkbox value='{{item.k}}'>{{item.v}}</checkbox>
+      </label>
+    </checkbox-group>
+  </view>
+  <view class='add_todo'>
+  <input placeholder-style="color:red" placeholder="输入您今日计划！" />
+  <button bindtap="add_todo">添加</button>
+  </view>
+</view>

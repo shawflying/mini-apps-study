@@ -1,0 +1,20 @@
+/* pages/todo/index.wxss */
+.todo_list{
+  width: 96%;
+  background-color: '#affffa';
+  border: 1px solid red;
+  border-radius: 5px;
+  margin-left: 2%;
+}
+
+.todo_list checkbox-group{
+  width: 96%;
+  margin-left: 2%;
+  margin: 5px;
+}
+
+.todo_list label{
+  width: 100%;
+  display: block;
+  margin-top: 5px;
+}
