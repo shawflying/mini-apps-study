@@ -2,7 +2,6 @@
 .todo_list{
   width: 96%;
   background-color: '#affffa';
-  border: 1px solid red;
   border-radius: 5px;
   margin-left: 2%;
 }
@@ -18,3 +17,19 @@
   display: block;
   margin-top: 5px;
 }
+
+.add_todo .task{
+  width: 100%;
+  margin-top: 10px;
+  height: 30px;
+  background-color: "red";
+  margin-bottom: 15px;
+}
+.todo_sum{
+  width: 96%;
+  margin-left: 2%;
+}
+.todo_sum text{
+  margin-right: 10px;
+}
+/* .todo_now_tesk_num */

@@ -1,9 +1,8 @@
 <!--pages/todo/index.wxml-->
-<text>做点什么呢？</text>
 <view class='todo_body'>
   <view class='todo_sum'>
-    <text>今日任务：</text>
-    <text>已完成任务：</text>
+    <text class='todo_now_tesk_num'>今日任务：{{todo_list.length}}</text>
+    <text class='todo_already_tesk_num'>已完成任务：{{alreadys}}</text>
   </view>
   <view class='todo_list'>
     <checkbox-group bindchange="checkboxChange1">
@@ -13,7 +12,7 @@
     </checkbox-group>
   </view>
   <view class='add_todo'>
-  <input placeholder-style="color:red" placeholder="输入您今日计划！" />
-  <button bindtap="add_todo">添加</button>
+    <input type='text' bindinput='setTaskValue' value='{{task}}' class='task' placeholder="输入您今日计划！" />
+    <button size='20px' type='primary' bindtap="addTodo">添加</button>
   </view>
 </view>
