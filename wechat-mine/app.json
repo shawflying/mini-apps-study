@@ -1,9 +1,10 @@
 {
   "pages": [
+    "pages/login/index",
     "pages/todo/index",
     "pages/user/index",
     "pages/index/index",
-    "pages/logs/logs"    
+    "pages/logs/logs"   
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -30,10 +31,10 @@
         "text": "我的"
       },
       {
-        "pagePath": "pages/index/index",
+        "pagePath": "pages/login/index",
         "iconPath": "image/icon_API.png",
         "selectedIconPath": "image/icon_API_HL.png",
-        "text": "2048"
+        "text": "绑定"
       },
       {
         "pagePath": "pages/todo/index",

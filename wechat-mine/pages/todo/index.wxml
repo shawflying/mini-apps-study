@@ -6,7 +6,7 @@
   </view>
   <view class='todo_list'>
     <checkbox-group bindchange="checkboxChange1">
-      <label wx:for='{{todo_list}}'>
+      <label wx:for='{{todo_list}}' wx:key="{{item.k}}">
         <checkbox value='{{item.k}}'>{{item.v}}</checkbox>
       </label>
     </checkbox-group>
