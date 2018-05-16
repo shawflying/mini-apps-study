@@ -11,15 +11,22 @@ Page({
    */
   data: {
     mobile: '',
+    code: '',
+    sessionKey: '',
+    encryptedData: '',
+    iv: '',
+    openid: '',
+    unionid: '',
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
-
+  //设置绑定手机
   setMobileValue: function (e) {
     this.setData({ mobile: e.detail.value });
   },
-  login:function(){
+  login: function () {
+    let that = this;
     wx.request({
       url: 'https://app.yxxit.com/design/test',
       method: 'POST',
@@ -31,14 +38,81 @@ Page({
       },
       success: function (res) {
         console.log(res.data)
+        that.setData({});
         util.showSuccess("信息提交成功！")
       }
     })
   },
+  //获取登录getOpenid
+  getOpenid: function (e) {
+    let that = this;
+    wx.login({
+      success: (d) => {
+        console.log(d.code)
+        this.setData({
+          code: d.code
+        })
+        wx.request({
+          url: 'https://app.yxxit.com/wechat-mina/getBaseAuth',
+          data: {
+            code: d.code
+          },
+          success: function (d) {
+            console.log('通过code 获取session_key,openid:：', d);
+            that.setData({
+              sessionKey: d.data.session_key,
+              openid: d.data.openid
+            });
+            if (d.data.openid) {
+              util.showModel('温馨提示', `获取openid为：${d.data.openid}`)
+            } else {
+              util.showModel('温馨提示', `未获取到openid!`)
+            }
+            // util.showSuccess(`用户的openID为：${d.data.openid}`)
+          }
+        });
+      }
+    })
+  },
+  //获取登录code
+  getUnionid: function (e) {
+    let that = this;
+    let sessionKey = this.data.sessionKey;
+    let encryptedData = this.data.encryptedData;
+    let iv = this.data.iv;
+    if (!(sessionKey && encryptedData && iv)) {
+      util.showModel('温馨提示', `缓存信息已失效！`)
+    }
+    wx.request({
+      url: 'https://app.yxxit.com/wechat-mina/getUnionId',
+      method: 'POST',
+      data: {
+        sessionKey,
+        encryptedData,
+        iv
+      },
+      success: function (d) {
+        console.log('解析加密字段，并获取unionid值，该值有可能会有，也有可能没有！：', d);
+        console.log(d.data);
+        console.log(d.data.data.openId);
+        that.setData({
+          unionid: d.data.data.openId////"unionId": "UNIONID", 有些场景存在 有些场景不存在
+        });
+        if (d.data.data.unionId) {
+          util.showModel('温馨提示', `获取unionId为：${d.data.data.unionId}`)
+        } else {
+          util.showModel('温馨提示', `未获取到unionId!`)
+        }
+      }
+    });
+  },
+  //获取用户信息
   getUserInfo: function (e) {
     console.log(e)
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
+      encryptedData: e.detail.encryptedData,
+      iv: e.detail.iv,
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
@@ -74,8 +148,6 @@ Page({
         }
       })
     }
-
-
     wx.request({
       url: 'https://app.yxxit.com/design/test',
       method: 'POST',

@@ -6,6 +6,8 @@
 
 .content-login{
   width: 100%;
+  margin-top: 10px;
+  background-color: blueviolet;
 }
 
 .content-login input{
@@ -14,7 +16,7 @@
 }
 .content-login button{
   width: 30%;
-  margin-left: 5%;
+  margin-left: 8%;
 }
 
 .btn_login{

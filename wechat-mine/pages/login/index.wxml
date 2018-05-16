@@ -1,16 +1,18 @@
 <!--pages/login/index.wxml-->
 <view class="body">
-  <view class="content-login">
-    <input type='text' bindinput='setMobileValue' value='{{mobile}}' class='mobile' placeholder="输入设备号！" />
-    <button type='primary' class="btn_login" bindtap="login">登录</button>
-  </view>
-  
-
   <view class="userinfo">
     <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
     <block wx:else>
       <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}"></image>
       <text class="userinfo-nickname">{{userInfo.nickName}}</text>
     </block>
+  </view>
+  <view class="wx-login">
+    <button type='primary' class="btn_login" bindtap="getOpenid">get openid</button>
+    <button type='primary' class="btn_login" bindtap="getUnionid">get unionid</button>
+  </view>
+  <view class="content-login">
+    <input type='text' bindinput='setMobileValue' value='{{mobile}}' class='mobile' placeholder="输入设备号！" />
+    <button type='primary' class="btn_login" bindtap="login">绑定</button>
   </view>
 </view>
