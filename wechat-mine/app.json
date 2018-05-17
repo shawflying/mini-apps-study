@@ -1,10 +1,12 @@
 {
   "pages": [
+    "pages/index/index",
+    "pages/test/index",
     "pages/login/index",
     "pages/todo/index",
     "pages/user/index",
-    "pages/index/index",
-    "pages/logs/logs"   
+    
+    "pages/logs/logs"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -41,6 +43,12 @@
         "iconPath": "image/icon_API.png",
         "selectedIconPath": "image/icon_API_HL.png",
         "text": "todo"
+      },
+      {
+        "pagePath": "pages/test/index",
+        "iconPath": "image/icon_API.png",
+        "selectedIconPath": "image/icon_API_HL.png",
+        "text": "test"
       }
     ]
   },

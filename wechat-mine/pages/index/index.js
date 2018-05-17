@@ -1,54 +1,108 @@
 //index.js
 //获取应用实例
 const app = getApp()
-
+const utils = require('../../utils/util.js')
+var zm_list = function () {
+  return [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H",
+    "I",
+    "J",
+    "K",
+    "L",
+    "M",
+    "N",
+    "O",
+    "P",
+    "Q",
+    "R",
+    "S",
+    "T",
+    "U",
+    "V",
+    "W",
+    "X",
+    "Y",
+    "Z"
+  ];
+}
 Page({
   data: {
-    motto: '欢迎',
-    userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    zm_list: zm_list(),
+    hot_list: [],
+    all_list: {}
   },
   //事件处理函数
-  bindViewTap: function() {
+  bindViewTap: function () {
     wx.navigateTo({
       url: '../logs/logs'
     })
   },
   onLoad: function () {
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
-    } else if (this.data.canIUse){
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-      }
+    let that = this;
+    let hot_list = wx.getStorageSync('hot_list')
+    let all_list = wx.getStorageSync('all_list')
+
+    if (hot_list.length > 0 && all_list) {
+      that.setData({ hot_list, all_list });
     } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
+      all_list = {}
+      hot_list = [];
+      wx.request({
+        url: 'https://app.yxxit.com/GongJu/city/list?type=all',
+        method: "GET",
+        success: function (res) {
+          if (res.statusCode != 200 && res.data.code != 0) {
+            utils.showBusy("数据加载失败！");
+            return;
+          }
+          let list = res.data.data;
+          list
+            .sort(function (a, b) {
+              var s = a.shortName.toLowerCase();
+              var t = b.shortName.toLowerCase();
+              if (s < t) return -1;
+              if (s > t) return 1;
+            })
+            .forEach(function (m, i) {
+              if (m.isHot == "T") {//热门城市
+                hot_list.push({
+                  cityId: m.cityId,
+                  nameCn: m.nameCn,
+                  shortName: m.shortName
+                });
+              }
+
+              if (!all_list[m.shortName.substr(0, 1).toUpperCase()]) {
+                all_list[m.shortName.substr(0, 1).toUpperCase()] = [];
+              }
+              all_list[m.shortName.substr(0, 1).toUpperCase()].push({
+                cityId: m.cityId,
+                nameCn: m.nameCn,
+                shortName: m.shortName
+              });
+            });
+
+          wx.setStorage({
+            key: 'hot_list',
+            data: hot_list,
           })
+          wx.setStorage({
+            key: 'all_list',
+            data: all_list,
+          })
+          that.setData({ all_list, hot_list });
         }
       })
     }
-  },
-  getUserInfo: function(e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
-    })
+
   }
 })
+
+

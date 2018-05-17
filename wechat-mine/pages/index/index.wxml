@@ -1,13 +1,36 @@
 <!--index.wxml-->
-<view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
+
+<view>
+  <view class='header'>
+    <view class="secTitMain redSquare">
+      <view href="/" class="prev" id="forword"></view>
+      <view class="LogoName">
+        <span>选择城市</span>
+      </view>
+    </view>
   </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
+  <!-- 顶部 end -->
+
+  <view id="GPS">
+    <view class="hotCity cityItems">
+      <view>热门城市</view>
+      <view class="clearfix">
+        <view wx:for="{{hot_list}}" wx:key="{{item.cityId}}">
+          <view wx:href="`//m.daoxila.com/${item.shortName}/`" dataCityId="{{item.cityId}}">{{item.nameCn}}</view>
+        </view>
+      </view>
+    </view>
+    <view class="allCity cityItems">
+    <view>更多城市</view>
+      <view>
+        <view wx:for="{{zm_list}}"wx:for-item="n" wx:if="{{all_list[n]}}">
+           <view id="{{n}}">{{n}}</view>
+          <view wx:for="{{all_list[n]}}" wx:for-item="m" key="{{m.cityId}}">
+             <view v-bind:href="`//m.daoxila.com/${m.shortName}/`" dataCityId="{{m.cityId}}">{{m.nameCn}}</view> 
+          </view> 
+        </view>
+      </view>
+    </view>
   </view>
+  <!-- 底部 -->
 </view>
