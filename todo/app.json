@@ -1,11 +1,11 @@
 {
   "pages": [
+    "pages/todo/subject/index",
+    "pages/todo/index",
     "pages/index/index",
     "pages/test/index",
     "pages/login/index",
-    "pages/todo/index",
     "pages/user/index",
-    
     "pages/logs/logs"
   ],
   "window": {
@@ -21,10 +21,16 @@
     "backgroundColor": "#ffffff",
     "list": [
       {
+        "pagePath": "pages/todo/subject/index",
+        "iconPath": "image/icon_API.png",
+        "selectedIconPath": "image/icon_API_HL.png",
+        "text": "todo"
+      },
+      {
         "pagePath": "pages/index/index",
         "iconPath": "image/icon_component.png",
         "selectedIconPath": "image/icon_component_HL.png",
-        "text": "首页"
+        "text": "设置"
       },
       {
         "pagePath": "pages/user/index",
@@ -37,12 +43,6 @@
         "iconPath": "image/icon_API.png",
         "selectedIconPath": "image/icon_API_HL.png",
         "text": "绑定"
-      },
-      {
-        "pagePath": "pages/todo/index",
-        "iconPath": "image/icon_API.png",
-        "selectedIconPath": "image/icon_API_HL.png",
-        "text": "todo"
       },
       {
         "pagePath": "pages/test/index",

@@ -10,4 +10,6 @@
 <button type='primary' bindtap="scanCode">扫码工具</button>
 <button type='primary' open-type='share' bindtap="onShareAppMessage">点击分享</button>
 <button type='primary' bindtap="downloadFile">下载</button>
+<button type='primary' bindtap="todo">todo</button>
+<button type='primary' bindtap="turn_logs">访问日志</button>
 <!-- <web-view src="https://mp.weixin.qq.com/"></web-view> -->

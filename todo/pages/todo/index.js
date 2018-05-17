@@ -16,6 +16,7 @@ Page({
     //{k=键值,v=任务信息,c=是否勾选,start=创建时间,end=结束时间,warn=提醒时间}
     todo_list: [],//0 表示尚未完成 1 表示已经完成 2 表示删除
     task: "",
+    subject: {},
     alreadys: 0
   },
   //点击事件
@@ -83,7 +84,19 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options);
+    var subject_list = [
+      { id: 1, title: "已计划", color: 'red' },
+      { id: 2, title: "工作列表", color: 'green' },
+      { id: 3, title: "奇思妙想", color: 'blue' },
+    ];
     let that = this;
+    subject_list.forEach(function (m, i) {
+      if (options.id == m.id) {
+        that.setData({ subject: m });
+      }
+    });
+
     wx.getStorage({
       key: 'todo_list',
       success: function (res) {
@@ -97,7 +110,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-   
+
   },
 
   /**

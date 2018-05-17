@@ -46,7 +46,21 @@ Page({
       imageUrl: '/images/icon_component_HL.png'
     }
   },
-
+  todo: function () {
+    //切换 tab
+    //wx.switchTab是唯一能跳转到 tabBar 页面，并关闭其他所有非 tabBar 页面(意思是说其他几个wx.设置跳转时,如果app.json的tabBar中的list中也设置的相同的跳转路径时,跳转无效.而wx.switchTab却只能设置tabBar相同的路径)如下图
+    wx.switchTab({
+      url: '../todo/index',
+      complete: function (res) {
+        console.log(res);
+      }
+    })
+  },
+  turn_logs:function(){
+    wx.navigateTo({
+      url: '../logs/logs',
+    })
+  },
   getLocation: function () {
     //获取当前的地理位置、速度。当用户离开小程序后，此接口无法调用；当用户点击“显示在聊天顶部”时，此接口可继续调用。
     wx.getLocation({

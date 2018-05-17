@@ -1,0 +1,50 @@
+/* pages/todo/subject/index.wxss */
+
+.subject_header {
+  background-color: #affffa;
+  width: 100%;
+  height: 30px;
+  line-height: 30px;
+}
+
+.subject_header .subject_img {
+  width: 26px;
+  height: 26px;
+  line-height: 30px;
+  float: right;
+  margin-right: 10px;
+}
+
+.subject_header .subject_search {
+  float: left;
+  height: 30px;
+  line-height: 30px;
+  border: 1px solid red;
+  border-radius: 5px;
+  width: 86%;
+  background-color: 
+}
+
+.subject_header .subject_search image {
+  float: left;
+  width: 26px;
+  height: 26px;
+  line-height: 30px;
+}
+
+.subject_header .subject_search input {
+  float: left;
+  height: 30px;
+  line-height: 30px;
+  background-color: green;
+  width: 80%;
+}
+
+.subject_info {
+  clear: both;
+  width: 97%;
+  border-radius: 5px;
+  margin-top: 5px;
+  padding-left: 1%;
+  margin-left: 1%;
+}

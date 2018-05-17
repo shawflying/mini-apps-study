@@ -1,0 +1,11 @@
+<!--pages/todo/subject/index.wxml-->
+<view class='subject_header'>
+  <view class='subject_search'>
+    <image src="../../../image/plus.png"></image>
+    <input placeholder="搜索" type='text'></input>
+  </view>
+   <image class="subject_img" src="../../../image/plus.png"></image> 
+</view>
+<view class='subject_info' wx:for="{{subject_list}}" bindtap='showDetail' wx:for-item="m" wx:key="{{m.id}}" id="{{m.id}}" style='background-color:{{m.color}}'>
+  {{m.id}}. {{m.title}}
+</view>

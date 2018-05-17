@@ -1,5 +1,6 @@
 <!--pages/todo/index.wxml-->
 <view class='todo_body'>
+  <view>事件列表名称：{{subject.title}}</view>
   <view class='todo_sum'>
     <text class='todo_now_tesk_num'>今日任务：{{todo_list.length}}</text>
     <text class='todo_already_tesk_num'>已完成任务：{{alreadys}}</text>
