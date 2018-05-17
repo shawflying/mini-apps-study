@@ -1,0 +1,13 @@
+<!--pages/test/index.wxml-->
+<button type='primary' bindtap="getLocation">获取当前位置</button>
+<button type='primary' bindtap="chooseLocation">打开地图选择位置。</button>
+<button type='primary' bindtap="openLocation">​使用微信内置地图查看位置。</button>
+<button type='primary' bindtap="getSystem">获取系统信息</button>
+<button type='primary' bindtap="checkAPI">校验小程序API 是否可用</button>
+<button type='primary' bindtap="getNetworkType">获取网络类型。</button>
+<button type='primary' bindtap="makePhoneCall">拨打电话</button>
+
+<button type='primary' bindtap="scanCode">扫码工具</button>
+<button type='primary' open-type='share' bindtap="onShareAppMessage">点击分享</button>
+<button type='primary' bindtap="downloadFile">下载</button>
+<!-- <web-view src="https://mp.weixin.qq.com/"></web-view> -->

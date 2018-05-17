@@ -1,0 +1,53 @@
+/* pages/login/index.wxss */
+
+.body{
+  width: 100%;
+}
+
+.content-login{
+  width: 100%;
+  margin-top: 10px;
+  background-color: blueviolet;
+}
+
+.content-login input{
+  width: 60%;
+  float: left;
+}
+.content-login button{
+  width: 30%;
+  margin-left: 8%;
+}
+
+.btn_login{
+  width: 40%;
+  margin-left: 30%;
+  height: 30px;
+  line-height: 30px;
+  margin-top: 5px;
+}
+
+.userinfo{
+  width: 100%;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.userinfo button{
+  width: 40%;
+  margin-left: 30%;
+  height: 30px;
+  line-height: 30px;
+  margin-top: 5px;
+}
+
+.userinfo .userinfo-avatar{
+  width: 100px;
+  height: 100px;
+  border-radius: 100px;
+}
+
+.userinfo .userinfo-nickname{
+  display: block;
+  background-color: "#affffa"
+}
