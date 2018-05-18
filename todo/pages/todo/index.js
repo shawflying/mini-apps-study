@@ -85,23 +85,17 @@ Page({
    */
   onLoad: function (options) {
     console.log(options);
-    var subject_list = [
-      { id: 1, title: "已计划", color: 'red' },
-      { id: 2, title: "工作列表", color: 'green' },
-      { id: 3, title: "奇思妙想", color: 'blue' },
-    ];
+    let subject_list = wx.getStorageSync('subject_list');
+    console.log(subject_list)
     let that = this;
-    subject_list.forEach(function (m, i) {
-      if (options.id == m.id) {
-        that.setData({ subject: m });
-      }
-    });
-
+    let subject = subject_list[options.id]
+    that.setData({ subject });
+    console.log('主题名称：', subject)
     wx.getStorage({
       key: 'todo_list',
       success: function (res) {
         console.log("加载数据：", res.data)
-        that.setData({ todo_list: res.data });
+        that.setData({ todo_list: res.data, subject });
       }
     });
   },

@@ -1,10 +1,9 @@
 /* pages/todo/subject/index.wxss */
 
 .subject_header {
-  background-color: #affffa;
+  background-color: #161620;
   width: 100%;
-  height: 30px;
-  line-height: 30px;
+  height: 60px;
 }
 
 .subject_header .subject_img {
@@ -19,10 +18,10 @@
   float: left;
   height: 30px;
   line-height: 30px;
-  border: 1px solid red;
   border-radius: 5px;
   width: 86%;
-  background-color: 
+  background-color: #2b2d39;
+  margin-left: 2%;
 }
 
 .subject_header .subject_search image {
@@ -36,15 +35,33 @@
   float: left;
   height: 30px;
   line-height: 30px;
-  background-color: green;
+  background-color: #2b2d39;
   width: 80%;
+}
+
+.subject_body {
+  width: 100%;
+  margin-top: -18px;
 }
 
 .subject_info {
   clear: both;
-  width: 97%;
-  border-radius: 5px;
-  margin-top: 5px;
-  padding-left: 1%;
-  margin-left: 1%;
+  width: 100%;
+  border-radius: 10px 10px 0px 0px;
+  margin-top: -7px;
+  background-color: #f3f3f3;
+  height: 63px;
+  border-top: 1px solid #d9d9d9;
+  border-bottom: 1px solid #d9d9d9;
+}
+
+.subject_info .title{
+  font-size: 22px;
+  margin-left: 5%;
+  display: block;
+}
+
+.subject_info .desc{
+  font-size: 12px;
+  margin-left: 5%;
 }

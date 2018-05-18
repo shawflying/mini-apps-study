@@ -12,11 +12,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var subject_list = [
-      { id: 1, title: "已计划", color: 'red' },
-      { id: 2, title: "工作列表", color: 'green' },
-      { id: 3, title: "奇思妙想", color: 'blue' },
-    ];
+    let subject_list = wx.getStorageSync('subject_list');
     this.setData({ subject_list });
   },
 
@@ -30,7 +26,28 @@ Page({
       }
     })
   },
-
+  showAddOption: function (e) {
+    wx.showActionSheet({
+      itemList: ['提醒事项', '列表'],
+      itemColor: "#2179d7",
+      complete: function (e) {//点击的时候才会执行
+        console.log(e.tapIndex)
+        if (e.tapIndex == 1) {
+          wx.redirectTo({
+            url: '../subject_add/index',
+          })
+        } else if (e.tapIndex == 0) {
+          wx.redirectTo({
+            url: '../../todo/index?id=1',
+          })
+        }
+      }
+    })
+  },
+  //下拉刷新
+  onPullDownRefresh: function () {
+    console.log("下拉刷新");
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

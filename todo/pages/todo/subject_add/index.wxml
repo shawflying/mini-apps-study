@@ -1,0 +1,19 @@
+<!--pages/todo/subject_add/index.wxml-->
+<view class='SA_body'>
+  <input placeholder-class="sa_input" bindinput='setTitleValue' placeholder="新建列表" type='text'></input>
+  <view class='right'>
+    <image src="../../../image/plus.png"></image>
+    <text bindtap='addSubject'>完成</text>
+  </view>
+</view>
+<view class='hr'></view>
+<view class='SA_color'>
+  <view wx:for="{{colors}}" wx:key="item" bindtap='choiceColor' data-color="{{item.color}}" data-id="{{index}}" >
+    <view class="SA_radio" wx:if="{{!item.checked}}" style=' background-color: {{item.color}};'>
+    </view>
+    <view class='sa_w' wx:if="{{item.checked}}" style=' border-color: {{item.color}};'>
+      <view class='sa_n' style='background-color: {{item.color}};'></view>
+    </view>
+  </view>
+
+</view>

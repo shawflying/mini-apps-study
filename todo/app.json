@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/todo/subject_add/index",
     "pages/todo/subject/index",
     "pages/todo/index",
     "pages/index/index",
