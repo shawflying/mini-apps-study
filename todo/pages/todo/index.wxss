@@ -1,35 +1,104 @@
 /* pages/todo/index.wxss */
-.todo_list{
-  width: 96%;
-  background-color: '#affffa';
-  border-radius: 5px;
-  margin-left: 2%;
+
+page {
+  background-color: #f4f4f4;
+  height: 100%;
 }
 
-.todo_list checkbox-group{
-  width: 96%;
-  margin-left: 2%;
+/* 头部*/
+
+.header {
+  width: 100%;
+  background-color: #f4f4f4;
+  height: 80px;
+  border-top: 1px solid #e2be2d;
+  border-radius: 10px;
+}
+
+.header .title {
+  color: #e2be2d;
+  font-size: 25px;
+  float: left;
+  margin-left: 10px;
+}
+
+.header .edit {
+  float: right;
+  display: block;
+  text-align: right;
+  margin-right: 10px;
+}
+
+.header .edit .a {
+  display: block;
+  color: #e2be2d;
+  font-size: 25px;
+}
+
+.header .edit .b {
+  display: block;
+  color: #3f98d6;
+  font-size: 12px;
+}
+
+.hr {
+  clear: both;
+  border-top: 1px solid #e6e6e6;
   margin: 5px;
 }
 
-.todo_list label{
+/* 列表 */
+
+.todo_list {
   width: 100%;
-  display: block;
-  margin-top: 5px;
+  background-color: '#affffa';
+  border-radius: 5px;
+  padding-left: 10px;
 }
 
-.add_todo .task{
+.todo_list checkbox-group {
   width: 100%;
-  margin-top: 10px;
-  height: 30px;
-  background-color: "red";
-  margin-bottom: 15px;
 }
-.todo_sum{
-  width: 96%;
-  margin-left: 2%;
+
+.todo_list label {
+  width: 100%;
+  display: block;
+  height: 40px;
+  line-height: 40px;
+  border-bottom: 1px solid #efefef;
 }
-.todo_sum text{
-  margin-right: 10px;
+
+.todo_list label image {
+  width: 24px;
+  height: 24px;
+  margin-top: 8px;
+  float: right;
+  margin-right: 15px;
 }
-/* .todo_now_tesk_num */
+
+/* 输入 */
+
+.add_todo {
+  clear: both;
+  width: 100%;
+  border-bottom: 1px solid #efefef;
+  height: 40px;
+  line-height: 40px;
+  padding-left: 10px;
+  /* border: 1px solid red; */
+}
+
+.add_todo image {
+  width: 24px;
+  height: 24px;
+  margin-top: 8px;
+  float: left;
+  margin-right: 5px;
+}
+
+.add_todo .task {
+  float: left;
+  width: 70%;
+  height: 24px;
+  margin-top: 8px;
+}

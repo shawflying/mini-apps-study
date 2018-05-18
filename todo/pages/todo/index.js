@@ -1,4 +1,5 @@
 // pages/todo/index.js
+const utils = require("../../utils/util.js");
 Page({
 
   /**
@@ -17,58 +18,46 @@ Page({
     todo_list: [],//0 表示尚未完成 1 表示已经完成 2 表示删除
     task: "",
     subject: {},
-    alreadys: 0
+    alreadys: 0,
+    task_num: 0,//尚未完成的任务
+    subject_id: 0
   },
   //点击事件
   //方法名称可以自定义：
   //页面有自身的事件方法
-  checkboxChange1: function (e) {
+  checkboxChange: function (e) {
     console.log('checkbox发生change事件，携带value值为：', e.detail.value)
     let count = this.data.alreadys;
+    let task_num = 0;
     for (let i = 0; i < this.data.todo_list.length; i++) {
       if (e.detail.value == this.data.todo_list[i].k) {
         this.data.todo_list[i].c = (this.data.todo_list[i].c == 0) ? 1 : 0;
       }
       if (this.data.todo_list[i].c == 1) {
         count++;
+      } else {
+        task_num++
       }
     }
     wx.setStorage({
       key: "todo_list",
       data: this.data.todo_list,
-      success: function (err) {
-        console.log("存储成功！", err)
-      },
-      fail: (e) => {
-        console.log("存储失败：", e);
-      },
       complete: (e) => {
         console.log("总是存在：", e);
       }
     })
-    this.setData({ todo_list: this.data.todo_list, alreadys: count });
+    this.setData({ todo_list: this.data.todo_list, alreadys: count, task_num: task_num });
   },
-  addTodo: function () {
-    if (!this.data.task) {
-      wx.showToast({
-        title: '请输入今日计划！',
-        icon: 'loading',
-        duration: 1000,
-        mask: true
-      })
+  addTodo: function (e) {
+    let task_title = e.detail.value;
+    if (!task_title) {
+      utils.showModel("温馨提示", "请输入今日计划！")
       return
     }
-    this.data.todo_list.push({ k: new Date().getTime(), v: this.data.task, c: 0 });
-    console.log(this.data.todo_list);
+    this.data.todo_list.push({ k: new Date().getTime(), v: task_title, c: 0, subject_id: this.data.subject_id });
     wx.setStorage({
       key: "todo_list",
       data: this.data.todo_list,
-      success: function (err) {
-        console.log("存储成功！", err)
-      },
-      fail: (e) => {
-        console.log("存储失败：", e);
-      },
       complete: (e) => {
         console.log("总是存在：", e);
       }
@@ -76,28 +65,37 @@ Page({
 
     this.setData({ todo_list: this.data.todo_list, task: "" });
   },
-  //同步值信息
-  setTaskValue: function (e) {
-    this.setData({ task: e.detail.value });
-  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     console.log(options);
-    let subject_list = wx.getStorageSync('subject_list');
+    let subject_list = wx.getStorageSync('subject_list') || [];
+    let todo_list = wx.getStorageSync('todo_list') || [];
     console.log(subject_list)
     let that = this;
-    let subject = subject_list[options.id]
-    that.setData({ subject });
+    let id = options.id || 0
+    let subject = subject_list[id]
+    that.setData({ subject, subject_id: id });
     console.log('主题名称：', subject)
-    wx.getStorage({
-      key: 'todo_list',
-      success: function (res) {
-        console.log("加载数据：", res.data)
-        that.setData({ todo_list: res.data, subject });
+
+    let alreadys = 0;
+    let task_num = 0;
+    for (let i = 0; i < todo_list.length; i++) {
+      if (todo_list[i].c == 1) {
+        alreadys++;
+      } else {
+        task_num++
       }
-    });
+    }
+    wx.setStorage({
+      key: "todo_list",
+      data: todo_list,
+      complete: (e) => {
+        console.log("总是存在：", e);
+      }
+    })
+    this.setData({ todo_list, alreadys, task_num });
   },
 
   /**

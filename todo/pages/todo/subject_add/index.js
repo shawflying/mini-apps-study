@@ -39,7 +39,7 @@ Page({
   },
   addSubject: function (e) {
     console.log("获取点击事件", e);
-    let subject_list = wx.getStorageSync('subject_list')||[];
+    let subject_list = wx.getStorageSync('subject_list') || [];
 
     if (this.data.title == "") {
       // wx.redirectTo({
@@ -62,7 +62,7 @@ Page({
       return
     }
 
-    subject_list.push({ title: this.data.title, color: this.data.color })
+    subject_list.push({ id: new Date().getTime(), title: this.data.title, color: this.data.color })
     console.log(subject_list);
     wx.setStorage({
       key: "subject_list",

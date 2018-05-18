@@ -1,19 +1,21 @@
 <!--pages/todo/index.wxml-->
-<view class='todo_body'>
-  <view>事件列表名称：{{subject.title}}</view>
-  <view class='todo_sum'>
-    <text class='todo_now_tesk_num'>今日任务：{{todo_list.length}}</text>
-    <text class='todo_already_tesk_num'>已完成任务：{{alreadys}}</text>
+<view class='header'>
+  <text class='title'>{{subject.title}}</text>
+  <view class='edit'>
+    <text class='a'>{{task_num}}</text>
+    <text class='b'>编辑</text>
   </view>
-  <view class='todo_list'>
-    <checkbox-group bindchange="checkboxChange1">
-      <label wx:for='{{todo_list}}' wx:key="{{item.k}}">
-        <checkbox value='{{item.k}}'>{{item.v}}</checkbox>
-      </label>
-    </checkbox-group>
-  </view>
-  <view class='add_todo'>
-    <input type='text' bindinput='setTaskValue' value='{{task}}' class='task' placeholder="输入您今日计划！" />
-    <button size='20px' type='primary' bindtap="addTodo">添加</button>
-  </view>
+</view>
+<view class='hr'></view>
+<view class='todo_list'>
+  <checkbox-group bindchange="checkboxChange">
+    <label wx:for='{{todo_list}}' wx:key="{{item.k}}" >
+      <checkbox value='{{item.k}}'>{{item.v}}</checkbox>
+      <image src="../../../image/plus.png"></image>
+    </label>
+  </checkbox-group>
+</view>
+<view class='add_todo'>
+  <image src="../../../image/plus.png"></image>
+  <input type='text' bindconfirm='addTodo' value='{{task}}' class='task' placeholder="输入您今日计划！" />
 </view>

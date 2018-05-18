@@ -1,9 +1,10 @@
 {
   "pages": [
+    "pages/todo/index",
     "pages/todo/subject/index",
     "pages/todo/subject_add/index",
     
-    "pages/todo/index",
+    
     "pages/index/index",
     "pages/test/index",
     "pages/login/index",
