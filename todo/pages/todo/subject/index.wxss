@@ -37,6 +37,11 @@
   line-height: 30px;
   background-color: #2b2d39;
   width: 80%;
+  color: white;
+}
+
+.search_style{
+  color: #8e8e98;
 }
 
 .subject_body {

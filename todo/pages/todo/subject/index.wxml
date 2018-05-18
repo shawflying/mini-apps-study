@@ -6,12 +6,12 @@
 <view class='subject_header'>
   <view class='subject_search'>
     <image src="../../../image/plus.png"></image>
-    <input placeholder="搜索" type='text'></input>
+    <input placeholder="搜索" placeholder-class='search_style' bindinput='searchSubject' type='text'></input>
   </view>
   <image class="subject_img" bindtap='showAddOption' src="../../../image/plus.png"></image>
 </view>
 <view class='subject_body'>
-  <view class='subject_info' wx:for="{{subject_list}}" bindtap='showDetail' wx:for-item="m" wx:key="{{m.id}}" id="{{m.id}}" style='color:{{m.color}}'>
+  <view class='subject_info' wx:for="{{subject_list}}" bindtap='showDetail' wx:for-item="m" wx:key="{{m.id}}" data-id="{{index}}" id="{{m.id}}" style='color:{{m.color}}'>
     <text class='title'>{{m.title}}</text>
     <text class='desc'></text>
   </view>

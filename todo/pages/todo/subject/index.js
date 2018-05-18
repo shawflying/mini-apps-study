@@ -20,7 +20,7 @@ Page({
   showDetail: function (e) {
     console.log(e);
     wx.navigateTo({
-      url: '../../todo/index?id=' + e.target.id,
+      url: '../../todo/index?id=' + e.currentTarget.dataset.id,
       complete: function (res) {
         console.log(res);
       }
@@ -47,6 +47,17 @@ Page({
   //下拉刷新
   onPullDownRefresh: function () {
     console.log("下拉刷新");
+  },
+  //查询主题
+  searchSubject: function (e) {
+    let subject_list = wx.getStorageSync('subject_list');
+    // let subject_list = this.data.subject_list;
+    let key = e.detail.value;
+    console.log(e.detail.value)
+    let list = subject_list.filter(function (d) {
+      return d.title.indexOf(key) > -1
+    })
+    this.setData({ subject_list: list });
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

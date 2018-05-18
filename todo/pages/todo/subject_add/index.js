@@ -39,7 +39,7 @@ Page({
   },
   addSubject: function (e) {
     console.log("获取点击事件", e);
-    let subject_list = wx.getStorageSync('subject_list');
+    let subject_list = wx.getStorageSync('subject_list')||[];
 
     if (this.data.title == "") {
       // wx.redirectTo({
