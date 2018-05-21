@@ -38,4 +38,8 @@ var showModel = (title, content) => {
   })
 }
 
-module.exports = { formatTime, showBusy, showSuccess, showModel }
+var getId = () => {
+  return Math.round(new Date().getTime() / 1000) + ""
+}
+
+module.exports = { formatTime, showBusy, showSuccess, showModel, getId }

@@ -1,4 +1,5 @@
 //app.js
+const utils = require("./utils/util.js")
 App({
   onLaunch: function () {
     // 展示本地存储能力
@@ -8,7 +9,7 @@ App({
     let subject_list = wx.getStorageSync('subject_list');
     if (!subject_list) {
       subject_list = [];
-      subject_list.push({ id: new Date().getTime(), title: "默认", color: "#cc73e1" })
+      subject_list.push({ id: utils.getId(), title: "默认", color: "#cc73e1" })
     }
     wx.setStorage({
       key: "subject_list",

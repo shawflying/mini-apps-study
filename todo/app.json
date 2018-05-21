@@ -1,8 +1,9 @@
 {
   "pages": [
     "pages/todo/index",
-    "pages/todo/subject/index",
+    "pages/todo/task/index",
     
+    "pages/todo/subject/index",
     "pages/todo/subject_add/index",
     "pages/index/index",
     "pages/test/index",

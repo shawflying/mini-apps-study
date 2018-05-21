@@ -62,7 +62,7 @@ Page({
       return
     }
     let todo_list = this.data.todo_list;
-    todo_list.push({ k: new Date().getTime(), v: task_title, c: 0, subject_id: this.data.subject_id });
+    todo_list.push({ k: utils.getId(), v: task_title, c: 0, subject_id: this.data.subject_id });
     wx.setStorage({
       key: "todo_list_" + this.data.subject_id,
       data: todo_list,
@@ -89,7 +89,15 @@ Page({
     })
   },
   //编辑任务
-  edit_task: function () { },
+  edit_task: function (e) {
+    console.log(e);
+    let task_id = e.target.dataset.task_id;
+    console.log("sssssssss;", task_id);
+    wx.redirectTo({
+      url: `/pages/todo/task/index?subject_id=${this.data.subject_id}&task_id=${task_id}`,
+    })
+    return false;
+  },
   //删除任务
   edit_del: function () {
 
@@ -103,24 +111,23 @@ Page({
   ctrl_xt_show: function (e) {
     console.log('关东是触发事件', e);
     console.log('列表长度', this.data.todo_list.length, this.data.todo_list.length * 40);//列表长度
-    this.setData({ isAddInputHide: true});
+    this.setData({ isAddInputHide: true });
   },
   ctrl_xt_show_top: function (e) {//向上滚动 就进行改变
     console.log('关东是触发事件', e);
-    console.log('列表长度', this.data.todo_list.length,this.data.todo_list.length * 40);//列表长度
+    console.log('列表长度', this.data.todo_list.length, this.data.todo_list.length * 40);//列表长度
     this.setData({ isAddInputHide: false });
   },
   scroll: function (e) {//向上滚动 就进行改变
     console.log('1111111111', e);
-    console.log('列表长度', this.data.todo_list.length,this.data.todo_list.length * 40);//列表长度
+    console.log('列表长度', this.data.todo_list.length, this.data.todo_list.length * 40);//列表长度
   },
   /**
    * 生命周期函数--监听页面加载 
    */
   onLoad: function (options) {
-    let subject_id = options.id || '1526883562500';//请求入参
     let subject_list = wx.getStorageSync('subject_list') || [];
-
+    let subject_id = options.id || subject_list[0].id;//请求入参
     let subject = {};//主题信息
     let templist = subject_list.filter(function (a) {
       return a.id == subject_id

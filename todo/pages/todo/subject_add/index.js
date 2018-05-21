@@ -69,7 +69,7 @@ Page({
         utils.showModel("温馨提示", '该主题已经存在')
         return
       }
-      subject_id = new Date().getTime();
+      subject_id = utils.getId();
       subject_list.push({ id: subject_id, title: this.data.title, color: this.data.color })
     }
 
@@ -95,7 +95,7 @@ Page({
     let temp = subject_list.filter(function (m) {
       return m.id == subject_id
     })
-    
+
     let colors = this.data.colors;
     let isUpdate = false;
     if (temp.length > 0) {

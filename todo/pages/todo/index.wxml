@@ -11,7 +11,7 @@
   <checkbox-group>
     <label wx:for='{{todo_list}}' wx:key="{{item.k}}" style='display:{{(item.c==1&&isHide)?"none":"block"}};'>
       <checkbox value='{{item.k}}' checked='{{item.c==1}}' data-id='{{item.k}}' bindtap="checkboxChange">{{item.v}}</checkbox>
-      <!-- <image bindtap="edit_task" src="../../../image/plus.png"></image> -->
+       <image bindtap="edit_task" data-task_id="{{item.k}}" src="../../../image/plus.png"></image> 
        <!-- <image bindtap="edit_del" src="../../../image/trash.png"></image>  -->
     </label>
   </checkbox-group>
