@@ -26,7 +26,6 @@ Page({
     this.setData({ remark: e.detail.value });
   },
   bindPickerChange: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)//所在位置
     let index = e.detail.value;
     let subject = this.data.subject_list[index]
     this.setData({ subject_id: subject.id, index });
@@ -35,54 +34,104 @@ Page({
     if (!this.data.title) {
       return utils.showModel("温馨提示", "请输入任务标题");
     }
-    let todo_list = this.data.todo_list;
+    let that = this;
+    let todo_list = this.data.todo_list;//老的todo list 
+
+    let tempId = that.data.subject_id ? that.data.subject_id : that.data.old_subject_id
+    let index = -1;//有修改则删除锚点
     for (let i = 0; i < todo_list.length; i++) {
       if (todo_list[i].k == this.data.task_id) {
-        todo_list[i].title = this.data.title;
+        if (that.data.subject_id) {
+          index = i;//
+        }
+
+        todo_list[i].v = this.data.title;
         todo_list[i].remark = this.data.remark;
-        todo_list[i].subject_id = this.data.subject_id;
+        todo_list[i].subject_id = tempId;
       }
     }
-    wx.setStorage({
-      key: 'todo_list_' + this.data.todo_id,
-      data: todo_list,
-    })
-    wx.redirectTo({
-      url: '/pages/todo/index?id=' + this.data.subject_id,
-    })
+    if (index != -1) {
+      let todo_list_new = wx.getStorageSync('todo_list_' + that.data.subject_id) || [];
+      todo_list_new.push(todo_list[index]);
+      delete todo_list.splice(index, 1);//old 删除
+      wx.setStorage({
+        key: 'todo_list_' + that.data.old_subject_id,
+        data: todo_list,
+        complete: function (res) {
+          console.log("删除。。", res)
+        }
+      })
+
+      wx.setStorage({
+        key: 'todo_list_' + that.data.subject_id,
+        data: todo_list_new,
+        complete: function (res) {
+          wx.redirectTo({
+            url: '/pages/todo/index?id=' + that.data.subject_id,
+          })
+        }
+      })
+
+    } else {
+      wx.setStorage({
+        key: 'todo_list_' + that.data.old_subject_id,
+        data: todo_list,
+        complete: function (res) {
+          wx.redirectTo({
+            url: '/pages/todo/index?id=' + that.data.old_subject_id,
+          })
+        }
+      })
+    }
+  },
+  del: function () {
+    let that = this;
+    let todo_list = this.data.todo_list;//老的todo list 
+
+    for (let i = 0; i < todo_list.length; i++) {
+      if (todo_list[i].k == this.data.task_id) {
+        delete todo_list.splice(i, 1);//old 删除
+
+        wx.setStorage({
+          key: 'todo_list_' + that.data.old_subject_id,
+          data: todo_list,
+          complete: function (res) {
+            wx.redirectTo({
+              url: '/pages/todo/index?id=' + that.data.old_subject_id,
+            })
+          }
+        })
+      }
+    }
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     console.log("请求入参：", options);
-    let subject_id = options.subject_id || 0;//subject id
-    let task_id = options.task_id || 0;//todo list key 
-    let array = [], index = 0, title = "", remark = "", todo_list = [];
-
     let subject_list = wx.getStorageSync('subject_list');
+    let subject_id = options.subject_id || subject_list[0].id;//subject id
+    let task_id = options.task_id || utils.getId();//todo list key 
+    let array = [], index = 0, title = "", remark = "", todo_list = [];
+    this.setData({ task_id, old_subject_id: subject_id });
+
 
     subject_list.forEach(function (m, ind) {
       array.push(m.title);
-      console.log("000000000000", (m.id + "") == subject_id, m.id, subject_id);
-      if ((m.id + "") == subject_id) {
+      if (m.id == subject_id) {
         index = ind;//当前列表索引
-        todo_list = wx.getStorageSync('todo_list_' + subject_id);
-        console.log("11111111111111111", todo_list);
+        todo_list = wx.getStorageSync('todo_list_' + subject_id)||[];
         for (let i = 0; i < todo_list.length; i++) {
           let item = todo_list[i];
-          console.log("222222222222222", item.k, task_id);
           if ((item.k + "") == task_id) {
             title = item.v;
             remark = item.remark || "";
             subject_id = item.subject_id;
-            console.log("3333333333333333", title);
           }
         }
       }
     });
-    console.log("----------", title, remark);
-    this.setData({ subject_list, array, index, title, remark, task_id, old_subject_id: subject_id, todo_list });
+    this.setData({ subject_list, array, index, title, remark, todo_list });
   },
 
   /**

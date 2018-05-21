@@ -25,7 +25,6 @@ Page({
 
   //跳转到详情 路径中不能携带参数
   showDetail: function (e) {
-    console.log(e);
     wx.navigateTo({
       url: '../../todo/index?id=' + e.currentTarget.dataset.id,
       complete: function (res) {
@@ -35,25 +34,18 @@ Page({
   },
   showAddOption: function (e) {
     wx.showActionSheet({
-      // itemList: ['提醒事项', '列表'],
-      itemList: ['创建列表'],
+      itemList: ['提醒事项', '创建列表'],
       itemColor: "#2179d7",
       complete: function (e) {//点击的时候才会执行
-        console.log(e.tapIndex)
-
-        wx.redirectTo({
-          url: '../subject_add/index',
-        })
-
-        // if (e.tapIndex == 1) {
-        //   wx.redirectTo({
-        //     url: '../subject_add/index',
-        //   })
-        // } else if (e.tapIndex == 0) {
-        //   wx.redirectTo({
-        //     url: '../../todo/index?id=1',
-        //   })
-        // }
+        if (e.tapIndex == 1) {
+          wx.redirectTo({
+            url: '../subject_add/index',
+          })
+        } else if (e.tapIndex == 0) {
+          wx.redirectTo({
+            url: '../../todo/index',
+          })
+        }
       }
     })
   },

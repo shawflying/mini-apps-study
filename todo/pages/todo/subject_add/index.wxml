@@ -1,6 +1,6 @@
 <!--pages/todo/subject_add/index.wxml-->
 <view class='SA_body'>
-  <input placeholder-class="sa_input" bindinput='setTitleValue' placeholder="新建列表" type='text' value='{{subject.title}}'/>
+  <input placeholder-class="sa_input" bindinput='setTitleValue' bindconfirm='addSubject' placeholder="新建列表" type='text' value='{{subject.title}}'/>
   <view class='right'>
     <image src="../../../image/plus.png"></image>
     <text bindtap='addSubject'>完成</text>

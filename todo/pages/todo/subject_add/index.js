@@ -23,11 +23,8 @@ Page({
     title: ""
   },
   choiceColor: function (e) {
-    console.log('获取节点中 data- 部分熟属性值：', e.currentTarget.dataset)
     let data = e.currentTarget.dataset;
     let list = this.data.colors;
-    console.log(list[data.id]);
-    console.log(data.color);
     for (let i = 0; i < list.length; i++) {
       list[i].checked = false;
     }
@@ -40,7 +37,6 @@ Page({
   },
   //添加或者更新主题
   addSubject: function (e) {
-    console.log("获取点击事件", e);
     let subject_list = wx.getStorageSync('subject_list') || [];
     let subject_id = '';
 
@@ -54,10 +50,9 @@ Page({
       }
     } else {
       if (this.data.title == "") {
-        wx.redirectTo({
+        return wx.redirectTo({
           url: '/pages/todo/subject/index',
         })
-        return;
       }
       let isExist = false;
       for (let i = 0; i < subject_list.length; i++) {
@@ -66,14 +61,12 @@ Page({
         }
       }
       if (isExist) {
-        utils.showModel("温馨提示", '该主题已经存在')
-        return
+        return utils.showModel("温馨提示", '该主题已经存在')
       }
       subject_id = utils.getId();
       subject_list.push({ id: subject_id, title: this.data.title, color: this.data.color })
     }
 
-    console.log(subject_list);
     wx.setStorage({
       key: "subject_list",
       data: subject_list
@@ -87,11 +80,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options.id)
+    console.log("入参：", options)
     let subject = {}, title = "";
     let subject_id = options.id || 0;
     let subject_list = wx.getStorageSync('subject_list') || [];
-    console.log(subject_list);
     let temp = subject_list.filter(function (m) {
       return m.id == subject_id
     })
@@ -101,7 +93,6 @@ Page({
     if (temp.length > 0) {
       subject = temp[0]
       colors.forEach(function (m, i) {
-        console.log("222222", m, i);
         if (subject.color == m.color) {
           colors[i].checked = true;
         } else {

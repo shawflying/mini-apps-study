@@ -69,12 +69,14 @@ page {
   border-bottom: 1px solid #efefef;
 }
 
-.todo_list label image {
-  width: 24px;
-  height: 24px;
-  margin-top: 8px;
+.todo_list label text {
+  font-size: 12px;
+  color: #3f98d6;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
   float: right;
-  margin-right: 15px;
+  margin-right: 10px;
 }
 
 /* 输入 */

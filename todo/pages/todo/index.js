@@ -31,7 +31,6 @@ Page({
   //方法名称可以自定义：
   //页面有自身的事件方法
   checkboxChange: function (e) {
-    console.log(e);
     let alreadys = 0;
     let task_num = 0;
     let list = this.data.todo_list;
@@ -126,6 +125,7 @@ Page({
    * 生命周期函数--监听页面加载 
    */
   onLoad: function (options) {
+    console.log("請求入參：", options);
     let subject_list = wx.getStorageSync('subject_list') || [];
     let subject_id = options.id || subject_list[0].id;//请求入参
     let subject = {};//主题信息

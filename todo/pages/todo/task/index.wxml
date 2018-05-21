@@ -34,4 +34,7 @@
   </view>
 </view>
 
+<view>
+<button class='btn_del' bindtap='del' type='primary'>删除</button>
 <button class='btn_update' bindtap='update' type='primary'>修改</button>
+</view>
