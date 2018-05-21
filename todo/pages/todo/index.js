@@ -44,7 +44,7 @@ Page({
       }
     }
     wx.setStorage({
-      key: "todo_list",
+      key: "todo_list_" + this.data.subject_id,
       data: list,
       complete: (e) => {
         console.log("总是存在：", e);
@@ -58,37 +58,52 @@ Page({
       utils.showModel("温馨提示", "请输入今日计划！")
       return
     }
-    this.data.todo_list.push({ k: new Date().getTime(), v: task_title, c: 0, subject_id: this.data.subject_id });
+    let todo_list = this.data.todo_list;
+    todo_list.push({ k: new Date().getTime(), v: task_title, c: 0, subject_id: this.data.subject_id });
     wx.setStorage({
-      key: "todo_list",
-      data: this.data.todo_list,
+      key: "todo_list_" + this.data.subject_id,
+      data: todo_list,
       complete: (e) => {
         console.log("总是存在：", e);
       }
     })
 
-    this.setData({ todo_list: this.data.todo_list, task: "" });
+    this.setData({ todo_list, task: "" });
   },
   showArray: function () {
     let btnShowOrHideTitle = this.data.isHide == true ? "隐藏已完成的项目" : "显示已完成的项目";
     this.setData({ isHide: this.data.isHide == true ? false : true, btnShowOrHideTitle });
   },
   //编辑主题
-  edit_subject:function(){},
+  edit_subject: function () {
+    utils.showModel("温馨提示", "主题修改暂不支持！");
+  },
   //编辑任务
-  edit_task:function(){},
+  edit_task: function () { },
+  //删除任务
+  edit_del: function () {
+
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     console.log(options);
+    let subject_id = options.id || 0;//请求入参
     let subject_list = wx.getStorageSync('subject_list') || [];
-    let todo_list = wx.getStorageSync('todo_list') || [];
-    console.log(subject_list)
+
+    let subject = {};//主题信息
+    let templist = subject_list.filter(function (a) {
+      return a.id == subject_id
+    });
+    if (templist.length >= 1) {
+      subject = templist[0]
+    }
+
+    let todo_list = wx.getStorageSync('todo_list_' + subject_id) || [];
     let that = this;
-    let id = options.id || 0
-    let subject = subject_list[id]
-    that.setData({ subject, subject_id: id });
+
+    that.setData({ subject, subject_id });
     console.log('主题名称：', subject)
 
     let alreadys = 0;
@@ -101,7 +116,7 @@ Page({
       }
     }
     wx.setStorage({
-      key: "todo_list",
+      key: "todo_list_" + subject_id,
       data: todo_list,
       complete: (e) => {
         console.log("总是存在：", e);

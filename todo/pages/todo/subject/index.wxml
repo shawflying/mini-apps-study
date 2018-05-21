@@ -11,7 +11,7 @@
   <image class="subject_img" bindtap='showAddOption' src="../../../image/plus.png"></image>
 </view>
 <view class='subject_body'>
-  <view class='subject_info' wx:for="{{subject_list}}" bindtap='showDetail' wx:for-item="m" wx:key="{{m.id}}" data-id="{{index}}" id="{{m.id}}" style='color:{{m.color}}'>
+  <view class='subject_info' wx:for="{{subject_list}}" bindtap='showDetail' wx:for-item="m" wx:key="{{m.id}}" data-id="{{m.id}}" id="{{m.id}}" style='color:{{m.color}}'>
     <text class='title'>{{m.title}}</text>
     <text class='desc'></text>
   </view>

@@ -5,9 +5,11 @@ App({
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
-    let subject_list=[];
-    subject_list.push({ id: new Date().getTime(), title: "默认", color: "#cc73e1" })
-    console.log(subject_list);
+    let subject_list = wx.getStorageSync('subject_list');
+    if (!subject_list) {
+      subject_list = [];
+      subject_list.push({ id: new Date().getTime(), title: "默认", color: "#cc73e1" })
+    }
     wx.setStorage({
       key: "subject_list",
       data: subject_list

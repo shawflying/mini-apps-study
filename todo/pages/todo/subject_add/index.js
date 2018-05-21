@@ -7,9 +7,9 @@ Page({
    */
   data: {
     colors: [
-      { color: '#cc73e1', checked: false },
+      { color: '#cc73e1', checked: true },
       { color: '#71d93c', checked: false },
-      { color: '#41acf8', checked: true },
+      { color: '#41acf8', checked: false },
       { color: '#ebbb2f', checked: false },
       { color: '#af936c', checked: false },
       { color: '#e94364', checked: false },
@@ -61,8 +61,8 @@ Page({
       utils.showModel("温馨提示", '该主题已经存在')
       return
     }
-
-    subject_list.push({ id: new Date().getTime(), title: this.data.title, color: this.data.color })
+    let subject_id = new Date().getTime();
+    subject_list.push({ id: subject_id, title: this.data.title, color: this.data.color })
     console.log(subject_list);
     wx.setStorage({
       key: "subject_list",
@@ -70,7 +70,7 @@ Page({
     })
     this.setData({ subject_list });
     wx.redirectTo({
-      url: '/pages/todo/index?id=' + (subject_list.length - 1),
+      url: '/pages/todo/index?id=' + subject_id,
     })
   },
   /**
