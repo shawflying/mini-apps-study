@@ -36,8 +36,6 @@ Page({
     this.setData({ colors: list, color: data.color });
   },
   setTitleValue: function (e) {
-    console.log("获取点击事件", e);
-    console.log("获取value:", e.detail.value);
     this.setData({ title: e.detail.value });
   },
   //添加或者更新主题
@@ -45,7 +43,7 @@ Page({
     console.log("获取点击事件", e);
     let subject_list = wx.getStorageSync('subject_list') || [];
     let subject_id = '';
-    
+
     if (this.data.isUpdate) {
       subject_id = this.data.subject_id;
       for (let i = 0; i < subject_list.length; i++) {
@@ -90,12 +88,14 @@ Page({
    */
   onLoad: function (options) {
     console.log(options.id)
-    let subject = {};
+    let subject = {}, title = "";
     let subject_id = options.id || 0;
     let subject_list = wx.getStorageSync('subject_list') || [];
+    console.log(subject_list);
     let temp = subject_list.filter(function (m) {
       return m.id == subject_id
     })
+    
     let colors = this.data.colors;
     let isUpdate = false;
     if (temp.length > 0) {
@@ -103,15 +103,15 @@ Page({
       colors.forEach(function (m, i) {
         console.log("222222", m, i);
         if (subject.color == m.color) {
-          console.log("-----------", m, i);
           colors[i].checked = true;
         } else {
           colors[i].checked = false;
         }
       });
       isUpdate = true;
+      title = subject.title;
     }
-    this.setData({ subject, subject_id, colors, isUpdate });
+    this.setData({ subject, subject_id, colors, isUpdate, title });
   },
 
   /**

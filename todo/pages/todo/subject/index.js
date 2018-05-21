@@ -15,7 +15,7 @@ Page({
     let subject_list = wx.getStorageSync('subject_list');
     //加载时直接使用同步方法，很省事
     for (let i = 0; i < subject_list.length; i++) {
-      let a = wx.getStorageSync('todo_list_' + subject_list[i].id)
+      let a = wx.getStorageSync('todo_list_' + subject_list[i].id)||[]
       subject_list[i].count = a.filter(function (m) {
         return m.c != 1
       }).length
@@ -64,9 +64,7 @@ Page({
   //查询主题
   searchSubject: function (e) {
     let subject_list = wx.getStorageSync('subject_list');
-    // let subject_list = this.data.subject_list;
     let key = e.detail.value;
-    console.log(e.detail.value)
     let list = subject_list.filter(function (d) {
       return d.title.indexOf(key) > -1
     })

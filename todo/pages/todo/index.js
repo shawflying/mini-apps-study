@@ -21,8 +21,11 @@ Page({
     alreadys: 0,//已完成任务
     task_num: 0,//尚未完成的任务
     subject_id: 0,
+    scrollTop: 0,
+    focus_task_input: true,
     btnShowOrHideTitle: '显示已完成的项目',
-    isHide: true//是否隐藏 默认是隐藏
+    isHide: true,//是否隐藏 默认是隐藏
+    isAddInputHide: true,//是否隐藏 默认是隐藏
   },
   //点击事件
   //方法名称可以自定义：
@@ -71,7 +74,8 @@ Page({
       return m.c != 1
     }).length
 
-    this.setData({ todo_list, task_num, task: "" });
+    this.setData({ todo_list, task_num, task: "", focus_task_input: true });
+
   },
   showArray: function () {
     let btnShowOrHideTitle = this.data.isHide == true ? "隐藏已完成的项目" : "显示已完成的项目";
@@ -95,11 +99,26 @@ Page({
       url: '/pages/todo/subject/index',
     })
   },
+  //控制样式
+  ctrl_xt_show: function (e) {
+    console.log('关东是触发事件', e);
+    console.log('列表长度', this.data.todo_list.length, this.data.todo_list.length * 40);//列表长度
+    this.setData({ isAddInputHide: true});
+  },
+  ctrl_xt_show_top: function (e) {//向上滚动 就进行改变
+    console.log('关东是触发事件', e);
+    console.log('列表长度', this.data.todo_list.length,this.data.todo_list.length * 40);//列表长度
+    this.setData({ isAddInputHide: false });
+  },
+  scroll: function (e) {//向上滚动 就进行改变
+    console.log('1111111111', e);
+    console.log('列表长度', this.data.todo_list.length,this.data.todo_list.length * 40);//列表长度
+  },
   /**
-   * 生命周期函数--监听页面加载
+   * 生命周期函数--监听页面加载 
    */
   onLoad: function (options) {
-    let subject_id = options.id || 0;//请求入参
+    let subject_id = options.id || '1526883562500';//请求入参
     let subject_list = wx.getStorageSync('subject_list') || [];
 
     let subject = {};//主题信息

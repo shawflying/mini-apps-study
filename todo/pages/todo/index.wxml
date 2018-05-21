@@ -7,7 +7,7 @@
   </view>
 </view>
 <view class='hr'></view>
-<view class='todo_list'>
+<scroll-view class='todo_list'  scroll-y='true' lower-threshold="200" upper-threshold="300" bindscrolltoupper="ctrl_xt_show_top" bindscrolltolower="ctrl_xt_show">
   <checkbox-group>
     <label wx:for='{{todo_list}}' wx:key="{{item.k}}" style='display:{{(item.c==1&&isHide)?"none":"block"}};'>
       <checkbox value='{{item.k}}' checked='{{item.c==1}}' data-id='{{item.k}}' bindtap="checkboxChange">{{item.v}}</checkbox>
@@ -15,11 +15,16 @@
        <!-- <image bindtap="edit_del" src="../../../image/trash.png"></image>  -->
     </label>
   </checkbox-group>
-</view>
-<view class='add_todo'>
+</scroll-view>
+<view class='add_todo {{isAddInputHide?"":"ctrl_xt_show"}}'>
   <image src="../../../image/plus.png"></image>
-  <input type='text' bindconfirm='addTodo' value='{{task}}' class='task' placeholder="输入您今日计划！" />
+  <input type='text' bindconfirm='addTodo' focus="{{focus_task_input}}" value='{{task}}' class='task' placeholder="输入您今日计划！" />
 </view>
+
+<!-- <view class='add_todo ctrl_xt_show'>
+  <image src="../../../image/plus.png"></image>
+  <input type='text' bindconfirm='addTodo' focus="{{focus_task_input}}" value='{{task}}' class='task' placeholder="输入您今日计划！" />
+</view> -->
 <view class='hideOrShow'>
   <text wx:if="{{alreadys>0}}" bindtap="showArray" >{{btnShowOrHideTitle}}</text>
 </view>
