@@ -1,6 +1,6 @@
 <!--pages/todo/index.wxml-->
 <view class='header'>
-  <text class='title'>{{subject.title}}</text>
+  <text class='title' bindtap='redirectToSubject'>{{subject.title}}</text>
   <view class='edit'>
     <text class='a'>{{task_num}}</text>
     <text class='b' bindtap="edit_subject">编辑</text>

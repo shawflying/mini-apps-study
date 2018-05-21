@@ -13,6 +13,13 @@ Page({
    */
   onLoad: function (options) {
     let subject_list = wx.getStorageSync('subject_list');
+    //加载时直接使用同步方法，很省事
+    for (let i = 0; i < subject_list.length; i++) {
+      let a = wx.getStorageSync('todo_list_' + subject_list[i].id)
+      subject_list[i].count = a.filter(function (m) {
+        return m.c != 1
+      }).length
+    }
     this.setData({ subject_list });
   },
 

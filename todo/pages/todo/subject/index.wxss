@@ -60,10 +60,19 @@
   border-bottom: 1px solid #d9d9d9;
 }
 
-.subject_info .title{
+.subject_info .top .title{
   font-size: 22px;
   margin-left: 5%;
   display: block;
+  float: left;
+}
+
+.subject_info .top .num{
+  font-size: 22px;
+  margin-right: 5%;
+  display: block;
+  float: right;
+  text-align: right;
 }
 
 .subject_info .desc{

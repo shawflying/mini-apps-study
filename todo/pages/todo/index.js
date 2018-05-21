@@ -67,8 +67,11 @@ Page({
         console.log("总是存在：", e);
       }
     })
+    let task_num = todo_list.filter(function (m) {
+      return m.c != 1
+    }).length
 
-    this.setData({ todo_list, task: "" });
+    this.setData({ todo_list, task_num , task: "" });
   },
   showArray: function () {
     let btnShowOrHideTitle = this.data.isHide == true ? "隐藏已完成的项目" : "显示已完成的项目";
@@ -84,11 +87,15 @@ Page({
   edit_del: function () {
 
   },
+  redirectToSubject: function () {
+    wx.redirectTo({
+      url: '/pages/todo/subject/index',
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options);
     let subject_id = options.id || 0;//请求入参
     let subject_list = wx.getStorageSync('subject_list') || [];
 
