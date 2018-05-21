@@ -20,7 +20,9 @@ Page({
     subject: {},
     alreadys: 0,//已完成任务
     task_num: 0,//尚未完成的任务
-    subject_id: 0
+    subject_id: 0,
+    btnShowOrHideTitle: '显示已完成的项目',
+    isHide: true//是否隐藏 默认是隐藏
   },
   //点击事件
   //方法名称可以自定义：
@@ -67,6 +69,14 @@ Page({
 
     this.setData({ todo_list: this.data.todo_list, task: "" });
   },
+  showArray: function () {
+    let btnShowOrHideTitle = this.data.isHide == true ? "隐藏已完成的项目" : "显示已完成的项目";
+    this.setData({ isHide: this.data.isHide == true ? false : true, btnShowOrHideTitle });
+  },
+  //编辑主题
+  edit_subject:function(){},
+  //编辑任务
+  edit_task:function(){},
   /**
    * 生命周期函数--监听页面加载
    */

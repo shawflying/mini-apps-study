@@ -3,19 +3,22 @@
   <text class='title'>{{subject.title}}</text>
   <view class='edit'>
     <text class='a'>{{task_num}}</text>
-    <text class='b'>编辑</text>
+    <text class='b' bindtap="edit_subject">编辑</text>
   </view>
 </view>
 <view class='hr'></view>
 <view class='todo_list'>
   <checkbox-group>
-    <label wx:for='{{todo_list}}' wx:key="{{item.k}}">
+    <label wx:for='{{todo_list}}' wx:key="{{item.k}}" style='display:{{(item.c==1&&isHide)?"none":"block"}};'>
       <checkbox value='{{item.k}}' checked='{{item.c==1}}' data-id='{{item.k}}' bindtap="checkboxChange">{{item.v}}</checkbox>
-      <image src="../../../image/plus.png"></image>
+      <image bindtap="edit_task" src="../../../image/plus.png"></image>
     </label>
   </checkbox-group>
 </view>
 <view class='add_todo'>
   <image src="../../../image/plus.png"></image>
   <input type='text' bindconfirm='addTodo' value='{{task}}' class='task' placeholder="输入您今日计划！" />
+</view>
+<view class='hideOrShow'>
+  <text wx:if="{{alreadys>0}}" bindtap="showArray" >{{btnShowOrHideTitle}}</text>
 </view>
