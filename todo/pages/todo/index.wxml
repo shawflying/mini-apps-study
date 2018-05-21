@@ -8,9 +8,9 @@
 </view>
 <view class='hr'></view>
 <view class='todo_list'>
-  <checkbox-group bindchange="checkboxChange">
-    <label wx:for='{{todo_list}}' wx:key="{{item.k}}" >
-      <checkbox value='{{item.k}}'>{{item.v}}</checkbox>
+  <checkbox-group>
+    <label wx:for='{{todo_list}}' wx:key="{{item.k}}">
+      <checkbox value='{{item.k}}' checked='{{item.c==1}}' data-id='{{item.k}}' bindtap="checkboxChange">{{item.v}}</checkbox>
       <image src="../../../image/plus.png"></image>
     </label>
   </checkbox-group>

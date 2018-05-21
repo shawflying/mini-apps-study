@@ -18,7 +18,7 @@ Page({
     todo_list: [],//0 表示尚未完成 1 表示已经完成 2 表示删除
     task: "",
     subject: {},
-    alreadys: 0,
+    alreadys: 0,//已完成任务
     task_num: 0,//尚未完成的任务
     subject_id: 0
   },
@@ -26,27 +26,29 @@ Page({
   //方法名称可以自定义：
   //页面有自身的事件方法
   checkboxChange: function (e) {
-    console.log('checkbox发生change事件，携带value值为：', e.detail.value)
-    let count = this.data.alreadys;
+    console.log(e);
+    let alreadys = 0;
     let task_num = 0;
-    for (let i = 0; i < this.data.todo_list.length; i++) {
-      if (e.detail.value == this.data.todo_list[i].k) {
-        this.data.todo_list[i].c = (this.data.todo_list[i].c == 0) ? 1 : 0;
+    let list = this.data.todo_list;
+    let id = e.target.dataset.id;
+    for (let i = 0; i < list.length; i++) {
+      if (id == list[i].k) {
+        list[i].c = (list[i].c == 0) ? 1 : 0;
       }
-      if (this.data.todo_list[i].c == 1) {
-        count++;
+      if (list[i].c == 1) {
+        alreadys++;
       } else {
         task_num++
       }
     }
     wx.setStorage({
       key: "todo_list",
-      data: this.data.todo_list,
+      data: list,
       complete: (e) => {
         console.log("总是存在：", e);
       }
     })
-    this.setData({ todo_list: this.data.todo_list, alreadys: count, task_num: task_num });
+    this.setData({ todo_list: list, alreadys, task_num });
   },
   addTodo: function (e) {
     let task_title = e.detail.value;
