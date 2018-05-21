@@ -71,7 +71,7 @@ Page({
       return m.c != 1
     }).length
 
-    this.setData({ todo_list, task_num , task: "" });
+    this.setData({ todo_list, task_num, task: "" });
   },
   showArray: function () {
     let btnShowOrHideTitle = this.data.isHide == true ? "隐藏已完成的项目" : "显示已完成的项目";
@@ -79,7 +79,10 @@ Page({
   },
   //编辑主题
   edit_subject: function () {
-    utils.showModel("温馨提示", "主题修改暂不支持！");
+    // utils.showModel("温馨提示", "主题修改暂不支持！");
+    wx.redirectTo({
+      url: '/pages/todo/subject_add/index?id=' + this.data.subject_id,
+    })
   },
   //编辑任务
   edit_task: function () { },

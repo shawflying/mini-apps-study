@@ -16,7 +16,10 @@ Page({
       { color: '#f19433', checked: false },
     ],
     subject_list: [],
+    subject_id: 0,//主题编号
     color: "#cc73e1",
+    subject: {},//主题对象
+    isUpdate: false,//是否进行更新 默认是否
     title: ""
   },
   choiceColor: function (e) {
@@ -37,32 +40,41 @@ Page({
     console.log("获取value:", e.detail.value);
     this.setData({ title: e.detail.value });
   },
+  //添加或者更新主题
   addSubject: function (e) {
     console.log("获取点击事件", e);
     let subject_list = wx.getStorageSync('subject_list') || [];
-
-    if (this.data.title == "") {
-      // wx.redirectTo({
-      //   url: '/pages/todo/subject/index',
-      // })
-      wx.switchTab({
-        url: '/pages/todo/subject/index',
-      })
-      return;
-    }
-
-    let isExist = false;
-    for (let i = 0; i < subject_list.length; i++) {
-      if (subject_list[i].title == this.data.title) {
-        isExist = true;
+    let subject_id = '';
+    
+    if (this.data.isUpdate) {
+      subject_id = this.data.subject_id;
+      for (let i = 0; i < subject_list.length; i++) {
+        if (subject_list[i].id == subject_id) {
+          subject_list[i].title = this.data.title;
+          subject_list[i].color = this.data.color;
+        }
       }
+    } else {
+      if (this.data.title == "") {
+        wx.redirectTo({
+          url: '/pages/todo/subject/index',
+        })
+        return;
+      }
+      let isExist = false;
+      for (let i = 0; i < subject_list.length; i++) {
+        if (subject_list[i].title == this.data.title) {
+          isExist = true;
+        }
+      }
+      if (isExist) {
+        utils.showModel("温馨提示", '该主题已经存在')
+        return
+      }
+      subject_id = new Date().getTime();
+      subject_list.push({ id: subject_id, title: this.data.title, color: this.data.color })
     }
-    if (isExist) {
-      utils.showModel("温馨提示", '该主题已经存在')
-      return
-    }
-    let subject_id = new Date().getTime();
-    subject_list.push({ id: subject_id, title: this.data.title, color: this.data.color })
+
     console.log(subject_list);
     wx.setStorage({
       key: "subject_list",
@@ -77,7 +89,29 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    console.log(options.id)
+    let subject = {};
+    let subject_id = options.id || 0;
+    let subject_list = wx.getStorageSync('subject_list') || [];
+    let temp = subject_list.filter(function (m) {
+      return m.id == subject_id
+    })
+    let colors = this.data.colors;
+    let isUpdate = false;
+    if (temp.length > 0) {
+      subject = temp[0]
+      colors.forEach(function (m, i) {
+        console.log("222222", m, i);
+        if (subject.color == m.color) {
+          console.log("-----------", m, i);
+          colors[i].checked = true;
+        } else {
+          colors[i].checked = false;
+        }
+      });
+      isUpdate = true;
+    }
+    this.setData({ subject, subject_id, colors, isUpdate });
   },
 
   /**

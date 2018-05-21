@@ -1,5 +1,7 @@
 {
   "navigationBarTitleText": "新建列表",
-  "backgroundColor": "#f4f4f4",
-  "navigationBarBackgroundColor": "#affffa"
+  "navigationBarTextStyle": "white",
+  "backgroundColor": "#161620",
+  "enablePullDownRefresh": true,
+  "navigationBarBackgroundColor": "#161620"
 }
