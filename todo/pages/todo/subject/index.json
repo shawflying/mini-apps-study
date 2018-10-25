@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "Todo List",
+  "navigationBarTextStyle":"white",
+  "backgroundColor":"#161620",
+  "enablePullDownRefresh":true,
+  "navigationBarBackgroundColor": "#161620"
+}

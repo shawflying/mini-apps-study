@@ -1,0 +1,7 @@
+/* pages/test/index.wxss */
+
+button{
+  height: 30px;
+  line-height: 30px;
+  margin-top: 3px;
+}

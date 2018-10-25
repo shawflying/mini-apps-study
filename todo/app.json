@@ -1,0 +1,25 @@
+{
+  "pages": [
+    "pages/todo/subject/index",
+    "pages/todo/index",
+    "pages/todo/task/index",
+    "pages/todo/subject_add/index",
+    "pages/index/index",
+    "pages/test/index",
+    "pages/login/index",
+    "pages/user/index",
+    "pages/logs/logs"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black"
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "connectSocket": 10000,
+    "uploadFile": 10000,
+    "downloadFile": 10000
+  }
+}

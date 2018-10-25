@@ -1,0 +1,81 @@
+/* pages/todo/subject/index.wxss */
+
+.subject_header {
+  background-color: #161620;
+  width: 100%;
+  height: 60px;
+}
+
+.subject_header .subject_img {
+  width: 26px;
+  height: 26px;
+  line-height: 30px;
+  float: right;
+  margin-right: 10px;
+}
+
+.subject_header .subject_search {
+  float: left;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 5px;
+  width: 86%;
+  background-color: #2b2d39;
+  margin-left: 2%;
+}
+
+.subject_header .subject_search image {
+  float: left;
+  width: 26px;
+  height: 26px;
+  line-height: 30px;
+}
+
+.subject_header .subject_search input {
+  float: left;
+  height: 30px;
+  line-height: 30px;
+  background-color: #2b2d39;
+  width: 80%;
+  color: white;
+}
+
+.search_style{
+  color: #8e8e98;
+}
+
+.subject_body {
+  width: 100%;
+  margin-top: -18px;
+}
+
+.subject_info {
+  clear: both;
+  width: 100%;
+  border-radius: 10px 10px 0px 0px;
+  margin-top: -7px;
+  background-color: #f3f3f3;
+  height: 63px;
+  border-top: 1px solid #d9d9d9;
+  border-bottom: 1px solid #d9d9d9;
+}
+
+.subject_info .top .title{
+  font-size: 22px;
+  margin-left: 5%;
+  display: block;
+  float: left;
+}
+
+.subject_info .top .num{
+  font-size: 22px;
+  margin-right: 5%;
+  display: block;
+  float: right;
+  text-align: right;
+}
+
+.subject_info .desc{
+  font-size: 12px;
+  margin-left: 5%;
+}

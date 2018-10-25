@@ -1,0 +1,22 @@
+<!--pages/todo/subject/index.wxml-->
+
+<import src="../../common/head.wxml" />
+<import src="../../common/foot.wxml" />
+<template is="head" data="{{title: 'audio'}}" />
+<view class='subject_header'>
+  <view class='subject_search'>
+    <image src="../../../image/plus.png"></image>
+    <input placeholder="搜索" placeholder-class='search_style' bindinput='searchSubject' type='text'></input>
+  </view>
+  <image class="subject_img" bindtap='showAddOption' src="../../../image/plus.png"></image>
+</view>
+<view class='subject_body'>
+  <view class='subject_info' wx:for="{{subject_list}}" bindtap='showDetail' wx:for-item="m" wx:key="{{m.id}}" data-id="{{m.id}}" id="{{m.id}}" style='color:{{m.color}}'>
+    <view class='top'>
+      <text class='title'>{{m.title}}</text>
+      <text class='num'>{{m.count}}</text>
+    </view>
+    <text class='desc'></text>
+  </view>
+</view>
+<template is="foot" />
